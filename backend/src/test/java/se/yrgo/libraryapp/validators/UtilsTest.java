@@ -1,6 +1,5 @@
 package se.yrgo.libraryapp.validators;
 
-import io.jooby.annotations.Param;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class UtilsTest {
     @Test
@@ -25,7 +25,7 @@ public class UtilsTest {
     }
 
     @Test
-    void lowerCase(){
+    void lowerCase() {
         String input = "PetiteTulipe";
         String expected = "petitetulipe";
         assertThat(Utils.onlyLettersAndWhitespace(input)).isEqualTo(expected);
@@ -93,5 +93,19 @@ public class UtilsTest {
     void mixedCharacters() {
         assertThat(Utils.cleanAndUnLeet("P37I73! 7ULIP3#%"))
                 .isEqualTo("petite tulipe");
+    }
+
+    @Test
+    void emptyString() {
+        assertThat(Utils.onlyLettersAndWhitespace("")).isEqualTo("");
+        assertThat(Utils.cleanAndUnLeet("")).isEqualTo("");
+    }
+
+    @Test
+    void testNullInput() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> Utils.cleanAndUnLeet(null));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> Utils.cleanAndUnLeet(null));
     }
 }
