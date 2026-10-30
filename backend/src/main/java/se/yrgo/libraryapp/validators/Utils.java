@@ -17,6 +17,10 @@ class Utils {
      * @return a string with all non-letters removed (except whitespace)
      */
     static String onlyLettersAndWhitespace(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Input cannot be null");
+        }
+
         return str.chars().filter(cp -> Character.isLetter(cp) || Character.isWhitespace(cp))
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString().toLowerCase();
@@ -31,6 +35,10 @@ class Utils {
      * @return a string without non alphabetic characters (except whitespace)
      */
     static String cleanAndUnLeet(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Input cannot be null");
+        }
+
         final var leetMap = Map.of('1', 'l', '3', 'e', '4', 'a', '5', 's', '6', 'b', '7', 't', '8', 'b', '0', 'o');
 
         final StringBuilder res = new StringBuilder();
