@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class UsernameTest {
     @ParameterizedTest
@@ -47,5 +48,9 @@ public class UsernameTest {
         assertThat(Username.validate(username)).isFalse();
     }
 
-
+    @Test
+    void nullInput() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> Username.validate(null));
+    }
 }
