@@ -1,5 +1,8 @@
 package se.yrgo.libraryapp.validators;
 
+import net.jqwik.api.ForAll;
+import net.jqwik.api.Property;
+import net.jqwik.api.Provide;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,6 +14,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class UtilsTest {
     @Test
@@ -108,4 +112,17 @@ public class UtilsTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> Utils.cleanAndUnLeet(null));
     }
+
+    @Property
+    boolean onlyLettersAndWhiteSpace(@ForAll String text){
+        String result = Utils.onlyLettersAndWhitespace(text);
+
+        for (Character c : result.toCharArray()){
+            if (!Character.isLowerCase(c) || !Character.isWhitespace(c)){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

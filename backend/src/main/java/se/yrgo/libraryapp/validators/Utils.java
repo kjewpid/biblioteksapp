@@ -21,7 +21,7 @@ class Utils {
             throw new IllegalArgumentException("Input cannot be null");
         }
 
-        return str.chars().filter(cp -> Character.isLetter(cp) || Character.isWhitespace(cp))
+        return str.chars().filter(cp -> Character.isLowerCase(cp) || Character.isWhitespace(cp))
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString().toLowerCase();
     }
