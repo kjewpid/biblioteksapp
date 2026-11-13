@@ -48,6 +48,11 @@ public final class RealName {
         if (name == null) {
             throw new IllegalArgumentException("Input cannot be null");
         }
+
+        if (name.isBlank()){
+            return false;
+        }
+
         String cleanName = Utils.cleanAndUnLeet(name);
         String[] words = cleanName.split("\\W+");
         for (int i = 0; i < words.length; i++) {
