@@ -21,11 +21,12 @@ class Utils {
             throw new IllegalArgumentException("Input cannot be null");
         }
 
-        return str.chars().filter(cp -> Character.isLowerCase(cp) || Character.isWhitespace(cp))
+        return str.toLowerCase()
+                .chars()
+                .filter(cp -> Character.isLetter(cp) || Character.isWhitespace(cp))
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString().toLowerCase();
+                .toString();
     }
-
     /**
      * Converts any "leet speak" letters into their alphabetic equivalent (i.e. 4 to a etc.) and 
      * then removes any letters that are not alphabetic (but not whitespace). Will return the string

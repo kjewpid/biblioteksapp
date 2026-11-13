@@ -118,7 +118,7 @@ public class UtilsTest {
         String result = Utils.onlyLettersAndWhitespace(text);
 
         for (Character c : result.toCharArray()){
-            if (!Character.isLowerCase(c) || !Character.isWhitespace(c)){
+            if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
                 return false;
             }
         }
